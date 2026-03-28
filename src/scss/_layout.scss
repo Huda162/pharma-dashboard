@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+  @include ltr-rtl('padding-left', var(--cui-sidebar-occupy-start, 0));
+  will-change: auto;
+  @include transition(padding 0.15s);
+}
+
+.waveContainer {
+  // height: 10vh;
+  overflow: hidden;
+}
+.viewBox {
+  height: 100%;
+  width: 100%;
+}
+.path {
+  stroke: none;
+  fill: #4fa807;
+}
