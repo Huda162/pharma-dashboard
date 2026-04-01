@@ -39,6 +39,7 @@ const Banners = () => {
     executeDelete,
     selectedLanguage,
     setSelectedLanguage,
+    confirmDelete,
   } = useBanners()
   const { isArabic, isEnglish, isHebrew } = useLanguage()
 
@@ -134,12 +135,17 @@ const Banners = () => {
                   <CTable align="middle" className="mb-3" hover responsive>
                     <CTableHead color="light">
                       <CTableRow>
-                        <CTableHeaderCell className="text-center" style={{width: '15%'}}>عنوان البانر</CTableHeaderCell>
+                        <CTableHeaderCell className="text-center" style={{ width: '15%' }}>
+                          عنوان البانر
+                        </CTableHeaderCell>
                         <CTableHeaderCell className="text-center">صورة البانر </CTableHeaderCell>
                         <CTableHeaderCell className="text-center">
                           صورة البانر للهاتف
                         </CTableHeaderCell>
-                        <CTableHeaderCell className="text-center" style={{width: '15%'}}> الإجراءات </CTableHeaderCell>
+                        <CTableHeaderCell className="text-center" style={{ width: '15%' }}>
+                          {' '}
+                          الإجراءات{' '}
+                        </CTableHeaderCell>
                       </CTableRow>
                     </CTableHead>
                     <CTableBody>
@@ -198,6 +204,7 @@ const Banners = () => {
                                   navigate(`/edit_banner/${item.id}`, { state: { item } })
                                 }
                               />
+                              <AppTooltip type="delete" onClick={() => confirmDelete(item.id)} />
                             </div>
                           </CTableDataCell>
                         </CTableRow>

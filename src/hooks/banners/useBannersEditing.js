@@ -63,10 +63,18 @@ export const useBannersEditing = (bannerId, item) => {
     setLoading(true)
     const formData = new FormData()
     formData.append('name', bannerName)
-    formData.append('image', bannerImageUpdated)
-    formData.append('image_en', bannerImageEnUpdated)
-    formData.append('image_mobile', bannerImageMobileUpdated)
-    formData.append('image_mobile_en', bannerImageMobileEnUpdated)
+    if (bannerImageUpdated) {
+      formData.append('image', bannerImageUpdated)
+    }
+    if (bannerImageEnUpdated) {
+      formData.append('image_en', bannerImageEnUpdated)
+    }
+    if (bannerImageMobileUpdated) {
+      formData.append('image_mobile', bannerImageMobileUpdated)
+    }
+    if (bannerImageMobileEnUpdated) {
+      formData.append('image_mobile_en', bannerImageMobileEnUpdated)
+    }
     formData.append('type', bannerType)
     formData.append('data_id', dataId)
     {

@@ -38,5 +38,9 @@ export const useBanners = () => {
     executeDelete,
     selectedLanguage,
     setSelectedLanguage,
+    showDialog,
+    confirmDelete,
+    executeDelete,
+    cancelDelete,
   }
 }
