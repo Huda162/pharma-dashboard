@@ -19,6 +19,7 @@ export const useBannerAdding = () => {
   const [dataId, setDataId] = useState('')
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [postUrl, setPostUrl] = useState('')
   const navigate = useNavigate()
   const { isArabic, isEnglish, isHebrew } = useLanguage()
 
@@ -40,6 +41,7 @@ export const useBannerAdding = () => {
     formData.append('image_en', bannerImageEn)
     formData.append('image_mobile', bannerImageMobile)
     formData.append('image_mobile_en', bannerImageMobileEn)
+    formData.append('post_url', postUrl)
 
     isArabic === 'true'
       ? formData.append('title_ar', bannerTitleAr)
@@ -54,7 +56,7 @@ export const useBannerAdding = () => {
       : formData.append('title_he', 'empty')
 
     formData.append('type', type)
-    formData.append('data_id', dataId)
+    formData.append('data_id', dataId || 0)
     console.log('all added')
     try {
       const resGet = await axios.post(`${API_ROUTE}/banners`, formData)
@@ -98,5 +100,7 @@ export const useBannerAdding = () => {
     setType,
     dataId,
     setDataId,
+    postUrl,
+    setPostUrl,
   }
 }

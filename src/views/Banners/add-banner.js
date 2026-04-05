@@ -56,6 +56,8 @@ const AddBanner = () => {
     setType,
     dataId,
     setDataId,
+    postUrl,
+    setPostUrl,
   } = useBannerAdding()
 
   const { width } = useWidth()
@@ -140,6 +142,7 @@ const AddBanner = () => {
                         />
                       </CCol>
                     )}
+
                     <div className="mb-3">
                       <CFormInput
                         label="صورة البانر"
@@ -221,7 +224,7 @@ const AddBanner = () => {
                       )}
                     </div>
                     <CCol md={12}>هذا البانر تابع لـ</CCol>
-                    <CCol md={2} className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-start items-start gap-3">
                       <CFormCheck
                         button={{ color: 'secondary', variant: 'outline' }}
                         type="radio"
@@ -248,7 +251,20 @@ const AddBanner = () => {
                           setType(e.target.value)
                         }}
                       />
-                    </CCol>
+                      <CFormCheck
+                        button={{ color: 'secondary', variant: 'outline' }}
+                        type="radio"
+                        name="options-outlined"
+                        id="main-outlined"
+                        autoComplete="off"
+                        label="رابط خارجي"
+                        value="link"
+                        checked={type === 'link'}
+                        onChange={(e) => {
+                          setType(e.target.value)
+                        }}
+                      />
+                    </div>
                     {type == 'product' ? (
                       <CCol md={12}>
                         <CFormSelect
@@ -259,13 +275,31 @@ const AddBanner = () => {
                           onChange={(e) => setDataId(e.target.value)}
                           required
                         >
-                          <option selected="" value=""> اختر المنتج</option>
+                          <option selected="" value="">
+                            {' '}
+                            اختر المنتج
+                          </option>
                           {products.map((item, index) => (
                             <option value={item.id} key={item.id}>
                               {item.name_ar}
                             </option>
                           ))}
                         </CFormSelect>
+                      </CCol>
+                    ) : type === 'link' ? (
+                      <CCol sm={width < 768 ? 12 : 12}>
+                        <CFormInput
+                          type="text"
+                          placeholder=""
+                          feedbackInvalid=""
+                          id="categoryNameAr"
+                          label="رابط خارجي"
+                          required
+                          onChange={(e) => {
+                            setPostUrl(e.target.value)
+                          }}
+                          value={postUrl}
+                        />
                       </CCol>
                     ) : (
                       <CCol md={12}>
@@ -277,7 +311,10 @@ const AddBanner = () => {
                           onChange={(e) => setDataId(e.target.value)}
                           required
                         >
-                          <option selected="" value=""> اختر القسم</option>
+                          <option selected="" value="">
+                            {' '}
+                            اختر القسم
+                          </option>
                           {categories.map((item, index) => (
                             <option value={item.id} key={item.id}>
                               {item.name_ar}

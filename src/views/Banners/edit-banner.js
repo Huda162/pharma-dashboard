@@ -8,6 +8,7 @@ import {
   CCardBody,
   CCol,
   CFormCheck,
+  CFormInput,
   CFormSelect,
   CRow,
 } from '@coreui/react'
@@ -64,6 +65,8 @@ const EditBanner = () => {
     setType,
     dataId,
     setDataId,
+    postUrl,
+    setPostUrl,
   } = useBannersEditing(params.id, item)
 
   const { isArabic, isEnglish, isHebrew } = useLanguage()
@@ -236,7 +239,7 @@ const EditBanner = () => {
                 )}
               </div>
               <CCol md={12}>هذا البانر تابع لـ</CCol>
-              <CCol md={2} className="d-flex justify-content-between">
+              <div className="d-flex justify-content-start items-start gap-3">
                 <CFormCheck
                   button={{ color: 'secondary', variant: 'outline' }}
                   type="radio"
@@ -263,7 +266,20 @@ const EditBanner = () => {
                     setType(e.target.value)
                   }}
                 />
-              </CCol>
+                <CFormCheck
+                  button={{ color: 'secondary', variant: 'outline' }}
+                  type="radio"
+                  name="options-outlined"
+                  id="main-outlined"
+                  autoComplete="off"
+                  label="رابط خارجي"
+                  value="link"
+                  checked={type === 'link'}
+                  onChange={(e) => {
+                    setType(e.target.value)
+                  }}
+                />
+              </div>
               {type == 'product' ? (
                 <CCol md={12}>
                   <CFormSelect
@@ -278,12 +294,27 @@ const EditBanner = () => {
                       {' '}
                       اختر المنتج
                     </option>
-                    {products?.map((item, index) => (
+                    {products.map((item, index) => (
                       <option value={item.id} key={item.id}>
                         {item.name_ar}
                       </option>
                     ))}
                   </CFormSelect>
+                </CCol>
+              ) : type === 'link' ? (
+                <CCol sm={width < 768 ? 12 : 12}>
+                  <CFormInput
+                    type="text"
+                    placeholder=""
+                    feedbackInvalid=""
+                    id="categoryNameAr"
+                    label="رابط خارجي"
+                    required
+                    onChange={(e) => {
+                      setPostUrl(e.target.value)
+                    }}
+                    value={postUrl}
+                  />
                 </CCol>
               ) : (
                 <CCol md={12}>

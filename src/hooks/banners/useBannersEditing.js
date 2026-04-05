@@ -19,6 +19,7 @@ export const useBannersEditing = (bannerId, item) => {
     data_id,
     image_en,
     image_mobile_en,
+    post_url,
   } = item
   const [bannerName, setBannerName] = useState('')
   const [bannerImage, setBannerImage] = useState('')
@@ -34,6 +35,7 @@ export const useBannersEditing = (bannerId, item) => {
   const [bannerImageEnUpdated, setBannerImageEnUpdated] = useState()
   const [bannerImageMobileUpdated, setBannerImageMobileUpdated] = useState()
   const [bannerImageMobileEnUpdated, setBannerImageMobileEnUpdated] = useState()
+  const [postUrl, setPostUrl] = useState('')
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -53,6 +55,7 @@ export const useBannersEditing = (bannerId, item) => {
     setBannerTitleHeb(title_he)
     setType(type)
     setDataId(data_id)
+    setPostUrl(post_url)
   }
 
   useEffect(() => {
@@ -76,7 +79,8 @@ export const useBannersEditing = (bannerId, item) => {
       formData.append('image_mobile_en', bannerImageMobileEnUpdated)
     }
     formData.append('type', bannerType)
-    formData.append('data_id', dataId)
+    formData.append('data_id', dataId || 0)
+    formData.append('post_url', postUrl)
     {
       isArabic === 'true'
         ? formData.append('title_ar', bannerTitleAr)
@@ -142,5 +146,7 @@ export const useBannersEditing = (bannerId, item) => {
     setType,
     dataId,
     setDataId,
+    postUrl,
+    setPostUrl,
   }
 }
